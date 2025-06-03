@@ -1,0 +1,229 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target x86_64-apple-ios17.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name Bubbl
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+@_exported import Bubbl
+import Combine
+import CoreLocation
+import Foundation
+import MapKit
+import Swift
+import UIKit
+import UserNotifications
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct GeofencePoint : Swift.Codable, Swift.Hashable {
+  public let position: Swift.Int
+  public let latitude: Swift.Double
+  public let longitude: Swift.Double
+  public init(position: Swift.Int, latitude: Swift.Double, longitude: Swift.Double)
+  public init(from decoder: any Swift.Decoder) throws
+  public static func == (a: Bubbl.GeofencePoint, b: Bubbl.GeofencePoint) -> Swift.Bool
+  public func encode(to encoder: any Swift.Encoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum NotificationType : Swift.String, Swift.Codable {
+  case notification
+  case location
+  case geofence
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct NotificationEnvelope : Swift.Identifiable {
+  public let id: Foundation.UUID
+  public let title: Swift.String
+  public let body: Swift.String
+  public let userInfo: [Swift.String : Any]
+  public var mediaType: Swift.String? {
+    get
+  }
+  public var mediaUrl: Foundation.URL? {
+    get
+  }
+  public init(title: Swift.String, body: Swift.String, userInfo: [Swift.String : Any] = [:])
+  public typealias ID = Foundation.UUID
+}
+public struct Config {
+  public enum Environment : Swift.String, Swift.CaseIterable, Swift.Codable {
+    case development
+    case staging
+    case production
+    public init?(rawValue: Swift.String)
+    public typealias AllCases = [Bubbl.Config.Environment]
+    public typealias RawValue = Swift.String
+    nonisolated public static var allCases: [Bubbl.Config.Environment] {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+}
+@objc public enum BubblEnvironment : Swift.Int {
+  case development = 0
+  case staging = 1
+  case production = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public protocol BubblPluginDelegate {
+  @objc optional func bubblPlugin(_ plugin: Bubbl.BubblPlugin, didAuthenticate deviceID: Swift.String, bubblID: Swift.String)
+  @objc optional func bubblPlugin(_ plugin: Bubbl.BubblPlugin, didFailWith error: any Swift.Error)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class BubblPlugin : ObjectiveC.NSObject {
+  @objc public static let shared: Bubbl.BubblPlugin
+  @objc final public var logFileURL: Foundation.URL {
+    @objc get
+  }
+  @objc final public func clearLogs()
+  final public func start(apiKey: Swift.String, env: Bubbl.Config.Environment = .staging, segmentations: [Swift.String] = ["default"], delegate: (any Bubbl.BubblPluginDelegate)? = nil)
+  @objc(startWithApiKey:environment:segmentations:delegate:) final public func startObjC(apiKey: Swift.String, environment: Bubbl.BubblEnvironment, segmentations: Foundation.NSArray? = nil, delegate: (any Bubbl.BubblPluginDelegate)? = nil)
+  @objc final public func requestLocationWhenInUse()
+  @objc final public func requestLocationAlways()
+  @objc final public func requestPushPermission()
+  public static var locationAuthorizationPublisher: Combine.AnyPublisher<CoreLocation.CLAuthorizationStatus, Swift.Never> {
+    get
+  }
+  public static var pushAuthorizationPublisher: Combine.AnyPublisher<UserNotifications.UNAuthorizationStatus, Swift.Never> {
+    get
+  }
+  @objc final public var locationAuthorizationStatus: CoreLocation.CLAuthorizationStatus {
+    @objc get
+  }
+  @objc final public var pushAuthorizationStatus: UserNotifications.UNAuthorizationStatus {
+    @objc get
+  }
+  @objc final public var locationAuthorizationStatusRaw: Swift.Int {
+    @objc get
+  }
+  @objc final public var pushAuthorizationStatusRaw: Swift.Int {
+    @objc get
+  }
+  @objc final public func transform(_ text: Swift.String) -> Swift.String
+  @objc public static func updateAPNsToken(_ token: Foundation.Data)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Logger : ObjectiveC.NSObject {
+  @objc public static let shared: Bubbl.Logger
+  @objc final public func log(_ message: Swift.String)
+  @objc final public func warn(_ message: Swift.String)
+  @objc final public func error(_ message: Swift.String)
+  @objc final public func breadcrumb(_ msg: Swift.String)
+  @objc final public var logFileURL: Foundation.URL {
+    @objc get
+  }
+  @objc final public func clear()
+  @objc deinit
+}
+public struct CampaignData : Swift.Codable {
+  public var campaignsArray: [Bubbl.CampaignData.Campaign]
+  public init(campaignsArray: [Bubbl.CampaignData.Campaign] = [])
+  public struct Campaign : Swift.Codable {
+    public var campaign: Bubbl.CampaignData.Campaign.CampaignDetails
+    public var location: Bubbl.CampaignData.Campaign.Location
+    public var outsideNotificationsArray: [Bubbl.CampaignData.Notification]
+    public init(campaign: Bubbl.CampaignData.Campaign.CampaignDetails, location: Bubbl.CampaignData.Campaign.Location, outsideNotificationsArray: [Bubbl.CampaignData.Notification])
+    public struct CampaignDetails : Swift.Codable {
+      public var campaignName: Swift.String
+      public var campaignId: Swift.Int
+      public init(campaignName: Swift.String, campaignId: Swift.Int)
+      public func encode(to encoder: any Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
+    }
+    public struct Location : Swift.Codable {
+      public var locationId: Swift.Int
+      public var geofence: [Bubbl.GeofencePoint]
+      public init(locationId: Swift.Int, geofence: [Bubbl.GeofencePoint])
+      public func encode(to encoder: any Swift.Encoder) throws
+      public init(from decoder: any Swift.Decoder) throws
+    }
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct Notification : Swift.Codable {
+    public var id: Swift.Int
+    public var campaignId: [Swift.Int]
+    public var headline: Swift.String
+    public var body: Swift.String
+    public var type: Swift.String
+    public var media: [Bubbl.CampaignData.MediaDetail]
+    public var questions: [Bubbl.CampaignData.Question]?
+    public var cta: [Bubbl.CampaignData.CTADetail]
+    public var segmentationTags: Swift.String
+    public var testIds: Swift.String
+    public var start: Swift.String
+    public var end: Swift.String
+    public var activation: Swift.String
+    public var _id: Swift.String
+    public init(id: Swift.Int, campaignId: [Swift.Int], headline: Swift.String, body: Swift.String, type: Swift.String, media: [Bubbl.CampaignData.MediaDetail], questions: [Bubbl.CampaignData.Question]? = nil, cta: [Bubbl.CampaignData.CTADetail], segmentationTags: Swift.String, testIds: Swift.String, start: Swift.String, end: Swift.String, activation: Swift.String, _id: Swift.String)
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct Question : Swift.Codable {
+    public var id: Swift.Int
+    public var name: Swift.String
+    public var type: Swift.String
+    public var position: Swift.Int
+    public var choices: [Bubbl.CampaignData.Choice]?
+    public init(id: Swift.Int, name: Swift.String, type: Swift.String, position: Swift.Int, choices: [Bubbl.CampaignData.Choice]? = nil)
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct Choice : Swift.Codable {
+    public var id: Swift.Int?
+    public var name: Swift.String?
+    public init(id: Swift.Int? = nil, name: Swift.String? = nil)
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct MediaDetail : Swift.Codable {
+    public var type: Swift.String
+    public var url: Swift.String
+    public var _id: Swift.String
+    public init(type: Swift.String, url: Swift.String, _id: Swift.String)
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public struct CTADetail : Swift.Codable {
+    public var url: Swift.String?
+    public var label: Swift.String
+    public var _id: Swift.String
+    public init(url: Swift.String? = nil, label: Swift.String, _id: Swift.String)
+    public func encode(to encoder: any Swift.Encoder) throws
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CampaignPolygon {
+  public var polygon: MapKit.MKPolygon
+  public var campaign: Bubbl.CampaignData.Campaign
+  public init(polygon: MapKit.MKPolygon, campaign: Bubbl.CampaignData.Campaign)
+}
+extension CoreLocation.CLLocationCoordinate2D {
+  public func isInside(polygon: MapKit.MKPolygon) -> Swift.Bool
+}
+extension MapKit.MKPolygon {
+  public var coordinates: [CoreLocation.CLLocationCoordinate2D] {
+    get
+  }
+}
+extension Bubbl.NotificationType : Swift.Equatable {}
+extension Bubbl.NotificationType : Swift.Hashable {}
+extension Bubbl.NotificationType : Swift.RawRepresentable {}
+extension Bubbl.Config.Environment : Swift.Equatable {}
+extension Bubbl.Config.Environment : Swift.Hashable {}
+extension Bubbl.Config.Environment : Swift.RawRepresentable {}
+extension Bubbl.BubblEnvironment : Swift.Equatable {}
+extension Bubbl.BubblEnvironment : Swift.Hashable {}
+extension Bubbl.BubblEnvironment : Swift.RawRepresentable {}

@@ -1,0 +1,11 @@
+framework module Bubbl {
+  umbrella header "Bubbl.h"
+  export *
+
+  module * { export * }
+}
+
+module Bubbl.Swift {
+  header "Bubbl-Swift.h"
+  requires objc
+}
