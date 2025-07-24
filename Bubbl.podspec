@@ -26,5 +26,4 @@ Pod::Spec.new do |s|
   
     # Existing dependencies & system frameworks
     s.frameworks       = 'UIKit', 'CoreLocation', 'UserNotifications'
-  end
-  
+  end 

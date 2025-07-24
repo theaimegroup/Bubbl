@@ -282,6 +282,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreLocation;
+@import Foundation;
 @import ObjectiveC;
 @import UserNotifications;
 #endif
@@ -306,11 +307,46 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+SWIFT_PROTOCOL("_TtP5Bubbl26BackgroundGeofenceDelegate_")
+@protocol BackgroundGeofenceDelegate
+@optional
+- (void)didEnterRegion:(NSInteger)campaignID locationID:(NSInteger)locationID;
+- (void)didExitRegion:(NSInteger)campaignID locationID:(NSInteger)locationID;
+@end
+
+@class CLLocationManager;
+@class CLRegion;
+SWIFT_CLASS("_TtC5Bubbl23BackgroundRegionMonitor")
+@interface BackgroundRegionMonitor : NSObject <CLLocationManagerDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BackgroundRegionMonitor * _Nonnull shared;)
++ (BackgroundRegionMonitor * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, weak) id <BackgroundGeofenceDelegate> _Nullable delegate;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)clearCooldown;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didEnterRegion:(CLRegion * _Nonnull)region;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didExitRegion:(CLRegion * _Nonnull)region;
+@end
+
 typedef SWIFT_ENUM(NSInteger, BubblEnvironment, open) {
   BubblEnvironmentDevelopment = 0,
   BubblEnvironmentStaging = 1,
   BubblEnvironmentProduction = 2,
 };
+
+@class UNNotificationResponse;
+SWIFT_PROTOCOL("_TtP5Bubbl25BubblNotificationDelegate_")
+@protocol BubblNotificationDelegate
+/// Called when the user taps a Bubbl-generated local notification
+/// – campaign/location/notification IDs are delivered in <code>userInfo</code>.
+- (void)bubblDidReceive:(UNNotificationResponse * _Nonnull)response;
+@end
+
+SWIFT_CLASS("_TtC5Bubbl24BubblNotificationDetails")
+@interface BubblNotificationDetails : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 @class NSURL;
 @class NSString;
@@ -336,6 +372,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BubblPlugin 
 @property (nonatomic, readonly) NSInteger pushAuthorizationStatusRaw;
 - (NSString * _Nonnull)transform:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
 + (void)updateAPNsToken:(NSData * _Nonnull)token;
++ (void)updateFCMToken:(NSString * _Nonnull)token;
 @end
 
 SWIFT_PROTOCOL("_TtP5Bubbl19BubblPluginDelegate_")
@@ -343,6 +380,28 @@ SWIFT_PROTOCOL("_TtP5Bubbl19BubblPluginDelegate_")
 @optional
 - (void)bubblPlugin:(BubblPlugin * _Nonnull)plugin didAuthenticate:(NSString * _Nonnull)deviceID bubblID:(NSString * _Nonnull)bubblID;
 - (void)bubblPlugin:(BubblPlugin * _Nonnull)plugin didFailWith:(NSError * _Nonnull)error;
+@end
+
+SWIFT_PROTOCOL("_TtP5Bubbl26ForegroundGeofenceDelegate_")
+@protocol ForegroundGeofenceDelegate
+@optional
+- (void)didEnterCampaign:(NSInteger)campaignID locationID:(NSInteger)locationID;
+- (void)didExitCampaign:(NSInteger)campaignID locationID:(NSInteger)locationID;
+@end
+
+@class CLLocation;
+SWIFT_CLASS("_TtC5Bubbl25ForegroundGeofenceMonitor")
+@interface ForegroundGeofenceMonitor : NSObject <CLLocationManagerDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ForegroundGeofenceMonitor * _Nonnull shared;)
++ (ForegroundGeofenceMonitor * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@property (nonatomic, weak) id <ForegroundGeofenceDelegate> _Nullable delegate;
+/// Point the CLLocationManager <em>you already have running</em> at us.
+- (void)startWith:(CLLocationManager * _Nonnull)manager;
+- (void)stop;
+- (void)locationManager:(CLLocationManager * _Nonnull)mgr didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locs;
+- (void)clearCooldown;
 @end
 
 SWIFT_CLASS("_TtC5Bubbl6Logger")
@@ -359,6 +418,34 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) Logger * _No
 - (void)clear;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class UNUserNotificationCenter;
+@class UNNotification;
+SWIFT_CLASS("_TtC5Bubbl18NotificationBridge")
+@interface NotificationBridge : NSObject <UNUserNotificationCenterDelegate>
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)n withCompletionHandler:(void (^ _Nonnull)(UNNotificationPresentationOptions))c;
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completion;
+@end
+
+SWIFT_CLASS("_TtC5Bubbl19NotificationManager")
+@interface NotificationManager : NSObject <UNUserNotificationCenterDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) NotificationManager * _Nonnull shared;)
++ (NotificationManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, strong) BubblNotificationDetails * _Nullable latest;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)setAsNotificationDelegate;
+- (void)clearLatest;
+- (void)sendTestNotification;
+- (void)sendTestNotificationWithPayload:(NSDictionary<NSString *, id> * _Nonnull)userInfo;
+- (void)sendFirebaseStyleTestNotification;
+- (void)trackCTAEngagementWithNotificationID:(NSInteger)notificationID locationID:(NSInteger)locationID;
+- (void)trackMediaViewWithNotificationID:(NSInteger)notificationID locationID:(NSInteger)locationID;
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completionHandler;
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(void (^ _Nonnull)(UNNotificationPresentationOptions))completionHandler;
 @end
 
 #endif
@@ -653,6 +740,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreLocation;
+@import Foundation;
 @import ObjectiveC;
 @import UserNotifications;
 #endif
@@ -677,11 +765,46 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
+SWIFT_PROTOCOL("_TtP5Bubbl26BackgroundGeofenceDelegate_")
+@protocol BackgroundGeofenceDelegate
+@optional
+- (void)didEnterRegion:(NSInteger)campaignID locationID:(NSInteger)locationID;
+- (void)didExitRegion:(NSInteger)campaignID locationID:(NSInteger)locationID;
+@end
+
+@class CLLocationManager;
+@class CLRegion;
+SWIFT_CLASS("_TtC5Bubbl23BackgroundRegionMonitor")
+@interface BackgroundRegionMonitor : NSObject <CLLocationManagerDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BackgroundRegionMonitor * _Nonnull shared;)
++ (BackgroundRegionMonitor * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, weak) id <BackgroundGeofenceDelegate> _Nullable delegate;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)clearCooldown;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didEnterRegion:(CLRegion * _Nonnull)region;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didExitRegion:(CLRegion * _Nonnull)region;
+@end
+
 typedef SWIFT_ENUM(NSInteger, BubblEnvironment, open) {
   BubblEnvironmentDevelopment = 0,
   BubblEnvironmentStaging = 1,
   BubblEnvironmentProduction = 2,
 };
+
+@class UNNotificationResponse;
+SWIFT_PROTOCOL("_TtP5Bubbl25BubblNotificationDelegate_")
+@protocol BubblNotificationDelegate
+/// Called when the user taps a Bubbl-generated local notification
+/// – campaign/location/notification IDs are delivered in <code>userInfo</code>.
+- (void)bubblDidReceive:(UNNotificationResponse * _Nonnull)response;
+@end
+
+SWIFT_CLASS("_TtC5Bubbl24BubblNotificationDetails")
+@interface BubblNotificationDetails : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 @class NSURL;
 @class NSString;
@@ -707,6 +830,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BubblPlugin 
 @property (nonatomic, readonly) NSInteger pushAuthorizationStatusRaw;
 - (NSString * _Nonnull)transform:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
 + (void)updateAPNsToken:(NSData * _Nonnull)token;
++ (void)updateFCMToken:(NSString * _Nonnull)token;
 @end
 
 SWIFT_PROTOCOL("_TtP5Bubbl19BubblPluginDelegate_")
@@ -714,6 +838,28 @@ SWIFT_PROTOCOL("_TtP5Bubbl19BubblPluginDelegate_")
 @optional
 - (void)bubblPlugin:(BubblPlugin * _Nonnull)plugin didAuthenticate:(NSString * _Nonnull)deviceID bubblID:(NSString * _Nonnull)bubblID;
 - (void)bubblPlugin:(BubblPlugin * _Nonnull)plugin didFailWith:(NSError * _Nonnull)error;
+@end
+
+SWIFT_PROTOCOL("_TtP5Bubbl26ForegroundGeofenceDelegate_")
+@protocol ForegroundGeofenceDelegate
+@optional
+- (void)didEnterCampaign:(NSInteger)campaignID locationID:(NSInteger)locationID;
+- (void)didExitCampaign:(NSInteger)campaignID locationID:(NSInteger)locationID;
+@end
+
+@class CLLocation;
+SWIFT_CLASS("_TtC5Bubbl25ForegroundGeofenceMonitor")
+@interface ForegroundGeofenceMonitor : NSObject <CLLocationManagerDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) ForegroundGeofenceMonitor * _Nonnull shared;)
++ (ForegroundGeofenceMonitor * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@property (nonatomic, weak) id <ForegroundGeofenceDelegate> _Nullable delegate;
+/// Point the CLLocationManager <em>you already have running</em> at us.
+- (void)startWith:(CLLocationManager * _Nonnull)manager;
+- (void)stop;
+- (void)locationManager:(CLLocationManager * _Nonnull)mgr didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locs;
+- (void)clearCooldown;
 @end
 
 SWIFT_CLASS("_TtC5Bubbl6Logger")
@@ -730,6 +876,34 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) Logger * _No
 - (void)clear;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class UNUserNotificationCenter;
+@class UNNotification;
+SWIFT_CLASS("_TtC5Bubbl18NotificationBridge")
+@interface NotificationBridge : NSObject <UNUserNotificationCenterDelegate>
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)n withCompletionHandler:(void (^ _Nonnull)(UNNotificationPresentationOptions))c;
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completion;
+@end
+
+SWIFT_CLASS("_TtC5Bubbl19NotificationManager")
+@interface NotificationManager : NSObject <UNUserNotificationCenterDelegate>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) NotificationManager * _Nonnull shared;)
++ (NotificationManager * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, strong) BubblNotificationDetails * _Nullable latest;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)setAsNotificationDelegate;
+- (void)clearLatest;
+- (void)sendTestNotification;
+- (void)sendTestNotificationWithPayload:(NSDictionary<NSString *, id> * _Nonnull)userInfo;
+- (void)sendFirebaseStyleTestNotification;
+- (void)trackCTAEngagementWithNotificationID:(NSInteger)notificationID locationID:(NSInteger)locationID;
+- (void)trackMediaViewWithNotificationID:(NSInteger)notificationID locationID:(NSInteger)locationID;
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center didReceiveNotificationResponse:(UNNotificationResponse * _Nonnull)response withCompletionHandler:(void (^ _Nonnull)(void))completionHandler;
+- (void)userNotificationCenter:(UNUserNotificationCenter * _Nonnull)center willPresentNotification:(UNNotification * _Nonnull)notification withCompletionHandler:(void (^ _Nonnull)(UNNotificationPresentationOptions))completionHandler;
 @end
 
 #endif

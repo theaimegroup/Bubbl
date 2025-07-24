@@ -13,6 +13,8 @@ import UserNotifications
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import os.log
+import os
 public struct GeofencePoint : Swift.Codable, Swift.Hashable {
   public let position: Swift.Int
   public let latitude: Swift.Double
@@ -26,13 +28,95 @@ public struct GeofencePoint : Swift.Codable, Swift.Hashable {
     get
   }
 }
-public enum NotificationType : Swift.String, Swift.Codable {
+public enum NotificationType : Swift.Int {
   case notification
   case location
   case geofence
-  public init?(rawValue: Swift.String)
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objc final public class BubblNotificationDetails : ObjectiveC.NSObject, Swift.Identifiable {
+  final public let id: Foundation.UUID
+  final public let headline: Swift.String
+  final public let body: Swift.String
+  final public let mediaType: Swift.String?
+  final public let mediaURL: Swift.String?
+  final public let ctaLabel: Swift.String?
+  final public let ctaURL: Swift.String?
+  final public let notifID: Swift.Int
+  final public let locationID: Swift.Int
+  public typealias ID = Foundation.UUID
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class NotificationManager : ObjectiveC.NSObject, UserNotifications.UNUserNotificationCenterDelegate, Foundation.ObservableObject {
+  @objc public static let shared: Bubbl.NotificationManager
+  @objc @Combine.Published @_projectedValueProperty($latest) final public var latest: Bubbl.BubblNotificationDetails? {
+    @objc get
+    @objc @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  final public var $latest: Combine.Published<Bubbl.BubblNotificationDetails?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  final public var publisher: Combine.AnyPublisher<Bubbl.BubblNotificationDetails, Swift.Never> {
+    get
+  }
+  @objc final public func setAsNotificationDelegate()
+  @objc final public func clearLatest()
+  @objc final public func sendTestNotification()
+  @objc final public func sendTestNotificationWithPayload(_ userInfo: [Swift.String : Any])
+  @objc final public func sendFirebaseStyleTestNotification()
+  @objc final public func trackCTAEngagement(notificationID: Swift.Int, locationID: Swift.Int)
+  @objc final public func trackMediaView(notificationID: Swift.Int, locationID: Swift.Int)
+  final public func reportNotification(activity: Bubbl.ActivityType, locationID: Swift.Int, curatedNotificationID: Swift.Int, type: Bubbl.NotificationType)
+  @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void)
+  @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, willPresent notification: UserNotifications.UNNotification, withCompletionHandler completionHandler: @escaping (UserNotifications.UNNotificationPresentationOptions) -> Swift.Void)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class GeofenceService {
+  public static let shared: Bubbl.GeofenceService
+  @objc final public var currentPolygons: [MapKit.MKPolygon] {
+    @objc get
+  }
+  @objc deinit
+}
+extension Bubbl.GeofenceService {
+  final public var polygonsPublisherPublic: Combine.AnyPublisher<[MapKit.MKPolygon], Swift.Never> {
+    get
+  }
+}
+@objc public protocol BackgroundGeofenceDelegate {
+  @objc optional func didEnterRegion(_ campaignID: Swift.Int, locationID: Swift.Int)
+  @objc optional func didExitRegion(_ campaignID: Swift.Int, locationID: Swift.Int)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class BackgroundRegionMonitor : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
+  @objc public static let shared: Bubbl.BackgroundRegionMonitor
+  @objc weak final public var delegate: (any Bubbl.BackgroundGeofenceDelegate)?
+  final public var enterPublisher: Combine.AnyPublisher<(Swift.Int, Swift.Int), Swift.Never> {
+    get
+  }
+  final public var exitPublisher: Combine.AnyPublisher<(Swift.Int, Swift.Int), Swift.Never> {
+    get
+  }
+  final public var circlesPublisher: Combine.AnyPublisher<[MapKit.MKCircle], Swift.Never> {
+    get
+  }
+  @objc final public func clearCooldown()
+  final public func updateRegions(from cps: [Bubbl.CampaignPolygon])
+  @objc final public func locationManager(_ manager: CoreLocation.CLLocationManager, didEnterRegion region: CoreLocation.CLRegion)
+  @objc final public func locationManager(_ manager: CoreLocation.CLLocationManager, didExitRegion region: CoreLocation.CLRegion)
+  @objc deinit
+}
+extension Bubbl.BackgroundRegionMonitor {
+  final public var circlesPublisherPublic: Combine.AnyPublisher<[MapKit.MKCircle], Swift.Never> {
     get
   }
 }
@@ -49,6 +133,16 @@ public struct NotificationEnvelope : Swift.Identifiable {
   }
   public init(title: Swift.String, body: Swift.String, userInfo: [Swift.String : Any] = [:])
   public typealias ID = Foundation.UUID
+}
+@objc public protocol BubblNotificationDelegate {
+  @objc func bubblDidReceive(_ response: UserNotifications.UNNotificationResponse)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class NotificationBridge : ObjectiveC.NSObject, UserNotifications.UNUserNotificationCenterDelegate {
+  public static let shared: Bubbl.NotificationBridge
+  weak final public var delegate: (any Bubbl.BubblNotificationDelegate)?
+  @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, willPresent n: UserNotifications.UNNotification, withCompletionHandler c: @escaping (UserNotifications.UNNotificationPresentationOptions) -> Swift.Void)
+  @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse, withCompletionHandler completion: @escaping () -> Swift.Void)
+  @objc deinit
 }
 public struct Config {
   public enum Environment : Swift.String, Swift.CaseIterable, Swift.Codable {
@@ -97,6 +191,9 @@ public struct Config {
   public static var pushAuthorizationPublisher: Combine.AnyPublisher<UserNotifications.UNAuthorizationStatus, Swift.Never> {
     get
   }
+  public static var polygonsPublisher: Combine.AnyPublisher<[MapKit.MKPolygon], Swift.Never> {
+    get
+  }
   @objc final public var locationAuthorizationStatus: CoreLocation.CLAuthorizationStatus {
     @objc get
   }
@@ -111,6 +208,7 @@ public struct Config {
   }
   @objc final public func transform(_ text: Swift.String) -> Swift.String
   @objc public static func updateAPNsToken(_ token: Foundation.Data)
+  @objc public static func updateFCMToken(_ token: Swift.String)
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class Logger : ObjectiveC.NSObject {
@@ -124,6 +222,44 @@ public struct Config {
   }
   @objc final public func clear()
   @objc deinit
+}
+@objc public protocol ForegroundGeofenceDelegate {
+  @objc optional func didEnterCampaign(_ campaignID: Swift.Int, locationID: Swift.Int)
+  @objc optional func didExitCampaign(_ campaignID: Swift.Int, locationID: Swift.Int)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers final public class ForegroundGeofenceMonitor : ObjectiveC.NSObject, CoreLocation.CLLocationManagerDelegate {
+  @objc public static let shared: Bubbl.ForegroundGeofenceMonitor
+  @objc weak final public var delegate: (any Bubbl.ForegroundGeofenceDelegate)?
+  final public var enterPublisher: Combine.AnyPublisher<(Swift.Int, Swift.Int), Swift.Never> {
+    get
+  }
+  final public var exitPublisher: Combine.AnyPublisher<(Swift.Int, Swift.Int), Swift.Never> {
+    get
+  }
+  final public func updatePolygons(_ campaigns: [Bubbl.CampaignPolygon])
+  @objc final public func start(with manager: CoreLocation.CLLocationManager)
+  @objc final public func stop()
+  @objc final public func locationManager(_ mgr: CoreLocation.CLLocationManager, didUpdateLocations locs: [CoreLocation.CLLocation])
+  @objc final public func clearCooldown()
+  @objc deinit
+}
+public enum ActivityType : Swift.Int, Swift.CaseIterable {
+  case ctaEngagement
+  case notificationSent
+  case notificationDelivered
+  case mediaViewed
+  case location_update
+  case geofence_exit
+  case geofence_entry
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [Bubbl.ActivityType]
+  public typealias RawValue = Swift.Int
+  nonisolated public static var allCases: [Bubbl.ActivityType] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
 }
 public struct CampaignData : Swift.Codable {
   public var campaignsArray: [Bubbl.CampaignData.Campaign]
@@ -227,3 +363,6 @@ extension Bubbl.Config.Environment : Swift.RawRepresentable {}
 extension Bubbl.BubblEnvironment : Swift.Equatable {}
 extension Bubbl.BubblEnvironment : Swift.Hashable {}
 extension Bubbl.BubblEnvironment : Swift.RawRepresentable {}
+extension Bubbl.ActivityType : Swift.Equatable {}
+extension Bubbl.ActivityType : Swift.Hashable {}
+extension Bubbl.ActivityType : Swift.RawRepresentable {}
