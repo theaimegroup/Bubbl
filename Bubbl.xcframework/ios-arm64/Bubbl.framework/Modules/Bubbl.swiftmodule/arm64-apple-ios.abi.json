@@ -798,13 +798,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC8headlineSSvp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)headline",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC8headlineSSvp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -822,12 +823,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC8headlineSSvg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)headline",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC8headlineSSvg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -846,13 +848,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC4bodySSvp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)body",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC4bodySSvp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -870,12 +873,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC4bodySSvg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)body",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC4bodySSvg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -902,13 +906,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC9mediaTypeSSSgvp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)mediaType",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC9mediaTypeSSSgvp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -934,12 +939,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC9mediaTypeSSSgvg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)mediaType",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC9mediaTypeSSSgvg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -966,13 +972,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC8mediaURLSSSgvp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)mediaURL",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC8mediaURLSSSgvp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -998,12 +1005,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC8mediaURLSSSgvg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)mediaURL",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC8mediaURLSSSgvg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -1030,13 +1038,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC8ctaLabelSSSgvp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)ctaLabel",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC8ctaLabelSSSgvp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -1062,12 +1071,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC8ctaLabelSSSgvg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)ctaLabel",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC8ctaLabelSSSgvg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -1094,13 +1104,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC6ctaURLSSSgvp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)ctaURL",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC6ctaURLSSSgvp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -1126,12 +1137,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC6ctaURLSSSgvg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)ctaURL",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC6ctaURLSSSgvg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -1150,13 +1162,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC7notifIDSivp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)notifID",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC7notifIDSivp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
-              "AccessControl"
+              "AccessControl",
+              "ObjC"
             ],
             "isLet": true,
             "hasStorage": true,
@@ -1174,12 +1187,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC7notifIDSivg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)notifID",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC7notifIDSivg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -1198,13 +1212,14 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:5Bubbl0A19NotificationDetailsC10locationIDSivp",
+            "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(py)locationID",
             "mangledName": "$s5Bubbl0A19NotificationDetailsC10locationIDSivp",
             "moduleName": "Bubbl",
             "declAttributes": [
               "Final",
               "HasStorage",
               "AccessControl",
+              "ObjC",
               "RawDocComment"
             ],
             "isLet": true,
@@ -1223,12 +1238,13 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:5Bubbl0A19NotificationDetailsC10locationIDSivg",
+                "usr": "c:@M@Bubbl@objc(cs)BubblNotificationDetails(im)locationID",
                 "mangledName": "$s5Bubbl0A19NotificationDetailsC10locationIDSivg",
                 "moduleName": "Bubbl",
                 "implicit": true,
                 "declAttributes": [
-                  "Final"
+                  "Final",
+                  "ObjC"
                 ],
                 "accessorKind": "get"
               }
@@ -5813,66 +5829,6 @@
                 "accessorKind": "get"
               }
             ]
-          },
-          {
-            "kind": "Function",
-            "name": "transform",
-            "printedName": "transform(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@Bubbl@objc(cs)BubblPlugin(im)transform:",
-            "mangledName": "$s5Bubbl0A6PluginC9transformyS2SF",
-            "moduleName": "Bubbl",
-            "declAttributes": [
-              "Final",
-              "AccessControl",
-              "RawDocComment",
-              "ObjC"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "updateAPNsToken",
-            "printedName": "updateAPNsToken(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Data",
-                "printedName": "Foundation.Data",
-                "usr": "s:10Foundation4DataV"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@Bubbl@objc(cs)BubblPlugin(cm)updateAPNsToken:",
-            "mangledName": "$s5Bubbl0A6PluginC15updateAPNsTokenyy10Foundation4DataVFZ",
-            "moduleName": "Bubbl",
-            "static": true,
-            "declAttributes": [
-              "Final",
-              "AccessControl",
-              "ObjC",
-              "RawDocComment"
-            ],
-            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",

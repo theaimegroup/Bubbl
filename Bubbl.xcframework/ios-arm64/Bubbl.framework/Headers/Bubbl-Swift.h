@@ -342,17 +342,24 @@ SWIFT_PROTOCOL("_TtP5Bubbl25BubblNotificationDelegate_")
 - (void)bubblDidReceive:(UNNotificationResponse * _Nonnull)response;
 @end
 
+@class NSString;
 SWIFT_CLASS("_TtC5Bubbl24BubblNotificationDetails")
 @interface BubblNotificationDetails : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull headline;
+@property (nonatomic, readonly, copy) NSString * _Nonnull body;
+@property (nonatomic, readonly, copy) NSString * _Nullable mediaType;
+@property (nonatomic, readonly, copy) NSString * _Nullable mediaURL;
+@property (nonatomic, readonly, copy) NSString * _Nullable ctaLabel;
+@property (nonatomic, readonly, copy) NSString * _Nullable ctaURL;
+@property (nonatomic, readonly) NSInteger notifID;
+@property (nonatomic, readonly) NSInteger locationID;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 @class NSURL;
-@class NSString;
 @class NSArray;
 @protocol BubblPluginDelegate;
-@class NSData;
 SWIFT_CLASS("_TtC5Bubbl11BubblPlugin")
 @interface BubblPlugin : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BubblPlugin * _Nonnull shared;)
@@ -370,8 +377,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) BubblPlugin 
 /// Same properties but <code>Int</code>-typed for KVC in Obj-C
 @property (nonatomic, readonly) NSInteger locationAuthorizationStatusRaw;
 @property (nonatomic, readonly) NSInteger pushAuthorizationStatusRaw;
-- (NSString * _Nonnull)transform:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
-+ (void)updateAPNsToken:(NSData * _Nonnull)token;
 + (void)updateFCMToken:(NSString * _Nonnull)token;
 @end
 

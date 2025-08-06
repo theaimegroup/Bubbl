@@ -40,14 +40,14 @@ public enum NotificationType : Swift.Int {
 }
 @_hasMissingDesignatedInitializers @objc final public class BubblNotificationDetails : ObjectiveC.NSObject, Swift.Identifiable {
   final public let id: Foundation.UUID
-  final public let headline: Swift.String
-  final public let body: Swift.String
-  final public let mediaType: Swift.String?
-  final public let mediaURL: Swift.String?
-  final public let ctaLabel: Swift.String?
-  final public let ctaURL: Swift.String?
-  final public let notifID: Swift.Int
-  final public let locationID: Swift.Int
+  @objc final public let headline: Swift.String
+  @objc final public let body: Swift.String
+  @objc final public let mediaType: Swift.String?
+  @objc final public let mediaURL: Swift.String?
+  @objc final public let ctaLabel: Swift.String?
+  @objc final public let ctaURL: Swift.String?
+  @objc final public let notifID: Swift.Int
+  @objc final public let locationID: Swift.Int
   public typealias ID = Foundation.UUID
   @objc deinit
 }
@@ -206,8 +206,6 @@ public struct Config {
   @objc final public var pushAuthorizationStatusRaw: Swift.Int {
     @objc get
   }
-  @objc final public func transform(_ text: Swift.String) -> Swift.String
-  @objc public static func updateAPNsToken(_ token: Foundation.Data)
   @objc public static func updateFCMToken(_ token: Swift.String)
   @objc deinit
 }

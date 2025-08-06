@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/Bubbl-Swift.h</key>
 		<data>
-		QCsdKbUcIEfVvVE2P1lkJd0f+p8=
+		9LRsBzNz6rtfO8EffK4o8yt+ZqE=
 		</data>
 		<key>Headers/Bubbl.h</key>
 		<data>
@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		oRbBIDj8y2YJWaCtKn6fubN3BuQ=
+		8dQCIa2AiIjBpEBvHTptVVdAGMk=
 		</data>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		GFVtdy/LTFdCpw5OfX1aJ5QBYqo=
+		OQrB7X3eF4QfdUZeh5kGQ4lcOL4=
 		</data>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		GFVtdy/LTFdCpw5OfX1aJ5QBYqo=
+		OQrB7X3eF4QfdUZeh5kGQ4lcOL4=
 		</data>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		cnYiidqYFQuRxW90iH3Zvqm13+U=
+		OdOd7LWaR7uGvyR9iFaSybmBKXI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,7 +47,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AnspFZs74CVhgRpVVS2sJtm1ceu8FPbhlsBty8COMKk=
+			3JMMPx0WCekzZDz/IJPQ8v5HSc1b4f7RCpGqWcLiwks=
 			</data>
 		</dict>
 		<key>Headers/Bubbl.h</key>
@@ -61,14 +61,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qieLaue8k5oLWNdp8ls/x6PnmHhiV9rxLiw+7MYnlPQ=
+			ULK1DHtvuiRktP2mT5oNJkLE+mT/en/NAZkXSvT8UzQ=
 			</data>
 		</dict>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			g1p+9O8RT373ckM7fIR5B3rkBX87qvYGLCKz4xr5kVA=
+			hBvlCrw+bXDGFy1qyrm1GFtlpvXwW6fuOq9Rb62BNRs=
 			</data>
 		</dict>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -82,14 +82,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			g1p+9O8RT373ckM7fIR5B3rkBX87qvYGLCKz4xr5kVA=
+			hBvlCrw+bXDGFy1qyrm1GFtlpvXwW6fuOq9Rb62BNRs=
 			</data>
 		</dict>
 		<key>Modules/Bubbl.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wrLYgJjxGPtgAuB9A83MArPYHq8NC23AHlKaxpd1ToA=
+			mmu04qxFDN/0KqmoXmqtdw79lnHRMvpWeeVlkHYlHb8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
